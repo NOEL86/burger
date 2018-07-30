@@ -37,9 +37,9 @@ that will submit the user input into the database. --}}
     <br>
 
     <div class="row">
-        <div class="col-md-12 text-center">
-            <form method="POST" action="/burger/create">
-                <textarea name="comment"></textarea>
+        <div class="col-md-12 text-center enter_selection">
+            <form method="POST" action="/burgers/create">
+                <textarea type="text" class="form-control" id="enter_text" value="" name="burger_name"></textarea>
                 <p>Add a Burger for Consumption...</p>
                 <button id="add" type="submit">Submit</button>
             </form>

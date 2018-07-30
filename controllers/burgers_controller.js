@@ -20,12 +20,12 @@ router.get('/', function (req, res) {
 
 // Create a new burger using orm function and the users inputted data
 
-router.post('/burger/create', function (req, result) {
-    orm.insertOne([req.body.burger_name, req.body.devoured], function (data) {
-        res.json({ id: result.insertId });
-        res.render(data);
-    });
+router.post('/burgers/create', function (req, res) {
+    burger.insertOne(req.body.burger_name, function (result) {
+        res.redirect('/');
+    })
 });
+
 
 // eat a burger and update the screen using orm and user selection
 router.put('/burgers/update', function (req, res) {

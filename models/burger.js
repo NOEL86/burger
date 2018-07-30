@@ -11,7 +11,9 @@ var burger = {
         orm.updateOne('burgers', id, cb);
     },
 
-
+    insertOne: function (name, cb) {
+        orm.insertOne('burgers', name, cb);
+    }
 
 }
 
