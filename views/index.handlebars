@@ -22,11 +22,11 @@
             {{/unless}} {{/each}}
         </div>
 
+
         <div id="eaten" class="col-md-6 text-center" class="task">
             <p>Burgers Eaten. Yummy!</p>
-
             {{#each burgers}} {{#if this.devoured}}
-            <input class="form-control" type="text" placeholder="{{this.id}}.{{this.burger_name}}" readonly> {{/if}} {{/each}}
+            <input class="form-control" type="text" placeholder="{{this.id}}. {{this.burger_name}}" readonly> {{/if}} {{/each}}
         </div>
         <br>
     </div>
@@ -44,6 +44,6 @@
         </div>
     </div>
 
-
     <br>
+
 </div>
