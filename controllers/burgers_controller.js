@@ -9,7 +9,7 @@ var burger = require('../models/burger.js');
 
 router.get('/', function (req, res) {
     burger.selectAll(function (burgers) {
-        console.log(burgers);
+        // console.log(burgers);
         res.render('index', { burgers });
     })
 
@@ -28,15 +28,15 @@ router.post('/burgers/create', function (req, res) {
 
 
 // eat a burger and update the screen using orm and user selection
-router.put('/burgers/update', function (req, res) {
-
+router.put('/burgers/update/:id', function (req, res) {
     //result. changed rows??
-    burger.updateOne(req.body.burger_id, function (result) {
+    burger.updateOne(req.body.burger_id, function (err, result) {
+        if (err) throw err;
         console.log(result);
         res.redirect('/');
     });
 
 });
-//understand what's going on in req.body and find the id and reference it directly
-//update
+
+
 module.exports = router;
