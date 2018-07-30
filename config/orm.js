@@ -45,7 +45,6 @@ var orm = {
         var queryString = " SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function (err, result) {
             if (err) { throw err };
-            console.log(result);
             cb(result);
         });
     },
@@ -57,7 +56,7 @@ var orm = {
         queryString += col.toString();
         queryString += ") ";
         queryString += val + "(";
-        queryString += printQuestionMarks(val.length);
+        queryString += printQuestionMarks(val);
         queryString += ") ";
 
         console.log(queryString);
@@ -67,22 +66,16 @@ var orm = {
         })
     },
 
-    updateOne: function (tableInput, col, val, cb) {
-        var queryString = "UPDATE" + tableInput;
 
-        queryString += " SET ";
-        queryString += objToSql(col);
-        queryString += " WHERE ";
-        queryString += val;
+    //value = eaten or not
+    updateOne: function (tableInput, eaten, cb) {
 
-        console.log(queryString);
-
-        connection.query(queryString, function (err, res) {
-            if (err) { throw err };
-            cb(res);
-        })
+        connection.query('UPDATE ' + tableInput + ' SET devoured=true WHERE id=' + eaten + ';', function (err, result) {
+            if (err) throw err;
+            cb(result);
+        });
     }
 
 };
 
-module.exports = orm
+module.exports = orm;

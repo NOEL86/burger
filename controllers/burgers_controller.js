@@ -1,41 +1,42 @@
 var express = require('express');
 var router = express.Router();
-var burger = require('../models/burger');
-var orm = require('../config/orm');
+var burger = require('../models/burger.js');
+
 
 // 4. Create the `router` for the app, and export the `router` at the end of your file.
 
 // start at the index file
 
 router.get('/', function (req, res) {
-    res.redirect('/index');
+    burger.selectAll(function (burgers) {
+        console.log(burgers);
+        res.render('index', { burgers });
+    })
+
 });
 
 
 // use the selectAll function in orm file using burger data
 
-router.get('/index', function (req, res) {
-    orm.selectAll("burgers", function (data) {
-        var object = { burgers: data };
+// Create a new burger using orm function and the users inputted data
 
-        console.log(object);
-        res.render("index", object);
+router.post('/burger/create', function (req, result) {
+    orm.insertOne([req.body.burger_name, req.body.devoured], function (data) {
+        res.json({ id: result.insertId });
+        res.render(data);
     });
 });
 
-// Create a new burger using orm function and the users inputted data
+// eat a burger and update the screen using orm and user selection
+router.put('/burgers/update', function (req, res) {
 
-// router.post('/burger/create', function (req, res) {
-//     orm.insertOne(req.body.burger_name, function () {
-//         res.redirect('/index');
-//     });
-// });
+    //result. changed rows??
+    burger.updateOne(req.body.burger_id, function (result) {
+        console.log(result);
+        res.redirect('/');
+    });
 
-// delete/eat a burger and update the screen using orm and user selection
-// router.post('/burger/eat/:id', function (req, res) {
-//     orm.updateOne(req.params.id, function () {
-//         res.redirect('/index');
-//     });
-// });
-
-module.exports = router
+});
+//understand what's going on in req.body and find the id and reference it directly
+//update
+module.exports = router;

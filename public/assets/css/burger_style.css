@@ -1,3 +1,21 @@
 #main {
-    background-color: lightyellow;
+    background-color: rgb(250, 250, 136); 
+}
+
+
+#burger-img {
+    height: 150px;
+    width: 150px;
+  
+}
+
+#eat {
+    background-color: red;
+    color: white;
+}
+
+
+#add {
+    background-color: red;
+    color: white;
 }

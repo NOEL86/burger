@@ -1,19 +1,51 @@
  {{!-- * Setup the `index.handlebars` to have the template that Handlebars can render onto. Create a button in `index.handlebars`
 that will submit the user input into the database. --}}
+<div class="container">
 
-<h1>Eat-The-Burger!</h1>
+    <div class="row">
+        <div class="col-md-12 text-center" id="top">
+            <h1 id="heading">Eat-The-Burger!</h1>
 
-<ul>
-    {{#each burgers}}
-    <li>
-        <p> {{this.id}}. {{this.burger_name}} </p>
-    </li>
-    <button type="submit">Eat Me!</button>
-    {{/each}}
-</ul>
+            <img id="burger-img" src="https://img.apmcdn.org/fd3a545502114a88604cd9a271f7a32964662ff2/uncropped/2b1fc8-20180725-impossible-burger.jpg">
+        </div>
+    </div>
 
-<form method="POST" action="/burger/create">
-    <textarea name="comment"></textarea>
-    <p>Add a Burger for Consumption...</p>
-    <button type="submit">Submit</button>
-</form>
+    <div class="row">
+
+        <div class="col-md-6 text-center">
+            {{#each burgers}} {{#unless this.devoured}}
+            <pre> {{this.id}}. {{this.burger_name}} </pre>
+
+            <form method="POST" action="/burgers/update?_method=PUT" class="button-size">
+                <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                <br>
+                <button id="eat" type="submit">Eat Me!</button>
+            </form>
+            {{/unless}} {{/each}}
+        </div>
+
+        <div id="eaten" class="col-md-6 text-center" class="task">
+            <p>Burgers Eaten. Yummy!</p>
+
+            {{#each burgers}} {{#if this.devoured}}
+            <input class="form-control" type="text" placeholder="{{this.id}}.{{this.burger_name}}" readonly> {{/if}} {{/each}}
+        </div>
+        <br>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <form method="POST" action="/burger/create">
+                <textarea name="comment"></textarea>
+                <p>Add a Burger for Consumption...</p>
+                <button id="add" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <br>
+</div>
