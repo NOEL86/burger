@@ -28,11 +28,10 @@ router.post('/burgers/create', function (req, res) {
 
 
 // eat a burger and update the screen using orm and user selection
-router.put('/burgers/:id', function (req, res) {
+router.put('/burgers/update', function (req, res) {
     //result. changed rows??
-    burger.updateOne(req.body.burger_id, function (err, result) {
-        if (err) throw err + "you cannot eat a burger";
-        console.log(result);
+    burger.updateOne(req.body.burger_id, function (res) {
+        console.log(res);
         res.redirect('/');
     });
 
